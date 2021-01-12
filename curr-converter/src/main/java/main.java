@@ -14,15 +14,15 @@ public class main {
         systemInformationOfCurrency();
         String currencyFromUser = getCurrencyFromString();
         String currencyFromLowercase = checkCurrencyFrom(currencyFromUser);
-
+        System.out.println("\n");
         if(currencyFromLowercase == "na") {
             exit(0);
         }
 
-        System.out.println("\n");
-
-        String currencyToUser = getCurrencyToString();
+        String currencyToUser = getCurrencyToString(currencyFromLowercase);
         String currencyToLowercase = checkCurrencyTo(currencyToUser);
+        System.out.println("\n");
+        conversionFromTo(currencyFromLowercase, currencyToLowercase);
 
 
     }
@@ -74,7 +74,7 @@ public class main {
     }
 
     // get Currency from the user via user input for the to currency
-    static String getCurrencyToString() {
+    static String getCurrencyToString(String fromCurrencyLowerCase) {
         System.out.print("Please type in what currency you would like to convert to: ");
         Scanner scan = new Scanner(System.in);
         String toCurrency = scan.nextLine();
@@ -108,6 +108,65 @@ public class main {
         }
 
         return currencyType;
+    }
+
+    // grab both strings from and to, then ask for conversions
+    static void conversionFromTo(String currencyFrom, String currencyTo) {
+        float currencyEntered = 0.0f;
+        float currencyFinal = 0.0f;
+        Scanner scan = new Scanner(System.in);
+
+        if(currencyFrom == "usd") {
+            if(currencyTo == "yen") {
+                System.out.print("Please enter how much USD you want to convert to Yen: ");
+                currencyEntered = scan.nextFloat();
+                currencyFinal = currencyEntered * 104.28f;
+                System.out.println("You have " + currencyFinal + " yen");
+            }
+            else if(currencyTo == "dong") {
+                System.out.print("Please enter how much USD you want to convert to Dong: ");
+                currencyEntered = scan.nextFloat();
+                currencyFinal = currencyEntered * 23064;
+                System.out.println("You have " + currencyFinal + " dong");
+            }
+            else {
+                System.out.println("Not allowed to have these two FROM and TO: " +currencyFrom+ " & " +currencyTo+  "Exiting Now");
+            }
+        }
+        else if(currencyFrom == "yen") {
+            if(currencyTo == "usd") {
+                System.out.print("Please enter how much Yen you want to convert to USD: ");
+                currencyEntered = scan.nextFloat();
+                currencyFinal = currencyEntered * 0.0096f;
+                System.out.println("You have " + currencyFinal + " USD");
+            }
+            else if(currencyTo == "dong") {
+                System.out.print("Please enter how much Yen you want to convert to Dong: ");
+                currencyEntered = scan.nextFloat();
+                currencyFinal = currencyEntered * 221.15f;
+                System.out.println("You have " + currencyFinal + " dong");
+            }
+            else {
+                System.out.println("Not allowed to have thse two FROM and TO: " +currencyFrom+ " & " +currencyTo+  "Exiting Now");
+            }
+        }
+        else {
+            if(currencyTo == "usd") {
+                System.out.print("Please enter how much Dong you want to convert to USD: ");
+                currencyEntered = scan.nextFloat();
+                currencyFinal = currencyEntered * 0.000043f;
+                System.out.println("You have " + currencyFinal + " USD");
+            }
+            else if(currencyTo == "yen") {
+                System.out.print("Please enter how much Dong you want to convert to Yen: ");
+                currencyEntered = scan.nextFloat();
+                currencyFinal = currencyEntered * 0.0045f;
+                System.out.println("You have " + currencyFinal + " dong");
+            }
+            else {
+                System.out.println("Not allowed to have thse two FROM and TO: " +currencyFrom+ " & " +currencyTo+  "Exiting Now");
+            }
+        }
     }
 
 }
